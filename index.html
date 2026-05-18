@@ -1,416 +1,318 @@
-:root {
-  color-scheme: light;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  --bg: #eef5ff;
-  --surface: #ffffff;
-  --surface-soft: rgba(255, 255, 255, 0.98);
-  --primary: #2563eb;
-  --primary-strong: #1d4ed8;
-  --danger: #dc2626;
-  --warning: #f59e0b;
-  --muted: #64748b;
-  --border: #cbd5e1;
-  --radius: 26px;
-  --radius-sm: 16px;
-  --gap: 16px;
-  --max-width: 720px;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: linear-gradient(180deg, #eef5ff 0%, #f8fafc 70%, #ffffff 100%);
-  color: #0f172a;
-  font-family: inherit;
-}
-
-body,
-button,
-input,
-select {
-  font-family: inherit;
-}
-
-button,
-input,
-select {
-  font: inherit;
-}
-
-.wrap,
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 22px 16px 32px;
-}
-
-.card {
-  background: var(--surface-soft);
-  border-radius: calc(var(--radius) - 4px);
-  padding: 28px;
-  border: 1px solid rgba(226, 232, 240, 0.85);
-  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.08);
-}
-
-h1,
-h2 {
-  margin: 0;
-}
-
-h1 {
-  font-size: clamp(1.8rem, 2.4vw, 2.6rem);
-  letter-spacing: 0.02em;
-  margin-bottom: 24px;
-  color: #0f172a;
-}
-
-.form-grid {
-  display: grid;
-  gap: var(--gap);
-  grid-template-columns: 1fr;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.field label {
-  font-weight: 700;
-  color: #334155;
-}
-
-.field input,
-.field select {
-  width: 100%;
-  min-height: 52px;
-  padding: 14px 16px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: #f8fafc;
-  color: #0f172a;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
-
-.field input:focus,
-.field select:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
-  background: #ffffff;
-}
-
-.time-inputs {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-.time-field {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex: 1;
-  min-width: 120px;
-}
-
-.time-field input {
-  width: 100%;
-}
-
-.wide {
-  grid-column: 1 / -1;
-}
-
-.selected-user {
-  margin: 0 0 18px;
-  color: #0f172a;
-  font-weight: 700;
-  background: #eff6ff;
-  padding: 16px 18px;
-  border-radius: 22px;
-  border: 1px solid #dbeafe;
-}
-
-.status-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin: 24px 0;
-}
-
-.status-card {
-  border: 1px solid rgba(59, 130, 246, 0.12);
-  border-radius: 24px;
-  padding: 22px 20px;
-  background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-  text-align: center;
-}
-
-.status-label {
-  margin: 0;
-  color: var(--muted);
-  font-weight: 600;
-}
-
-.status-value {
-  margin: 12px 0 0;
-  font-size: 1.15rem;
-  font-weight: 700;
-}
-
-.progress-card {
-  margin-bottom: 24px;
-}
-
-.progress-bar {
-  width: 100%;
-  height: 18px;
-  border-radius: 999px;
-  background: #e2e8f0;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  width: 0;
-  border-radius: 999px;
-  transition: width 0.35s ease, background-color 0.35s ease;
-  background: #2563eb;
-}
-
-.progress-fill.warning {
-  background: var(--warning);
-}
-
-.progress-fill.danger {
-  background: var(--danger);
-}
-
-.progress-label {
-  margin-top: 8px;
-  text-align: right;
-  font-weight: 700;
-}
-
-.exchange-message {
-  margin: 18px 0 8px;
-  padding: 16px 18px;
-  border-radius: 18px;
-  background: #fef3c7;
-  color: #92400e;
-  border: 1px solid #f59e0b;
-  font-weight: 700;
-  display: none;
-}
-
-.exchange-message.visible {
-  display: block;
-}
-
-.action-group {
-  display: grid;
-  gap: 14px;
-  margin-top: 16px;
-}
-
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 54px;
-  gap: 10px;
-  border: none;
-  border-radius: 18px;
-  background: var(--primary);
-  color: #ffffff;
-  padding: 16px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.18);
-  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-}
-
-.button:hover {
-  background: var(--primary-strong);
-  transform: translateY(-1px);
-  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.22);
-}
-
-.button:disabled,
-button[disabled] {
-  opacity: 0.55;
-  cursor: not-allowed;
-  background: #94a3b8;
-  transform: none;
-  box-shadow: none;
-}
-
-.exchange-button {
-  background: #16a34a;
-}
-
-.exchange-button:hover {
-  background: #15803d;
-}
-
-.button.hidden {
-  display: none;
-}
-
-.button.visible {
-  display: inline-flex;
-}
-
-.history-section {
-  margin-top: 30px;
-}
-
-.table-wrapper {
-  overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-thead th {
-  font-weight: 700;
-  text-align: left;
-  padding: 14px 16px;
-  color: #64748b;
-  font-size: 0.95rem;
-  background: #f8fafc;
-}
-
-tbody td {
-  padding: 14px 16px;
-  border-top: 1px solid #e2e8f0;
-  color: #334155;
-}
-
-.empty-row td {
-  color: #64748b;
-}
-
-.delete-button {
-  background: #dc2626;
-  color: #ffffff;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 14px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.delete-button:hover {
-  background: #b91c1c;
-}
-
-@media (max-width: 700px) {
-  .status-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .time-inputs {
-    flex-direction: column;
-  }
-
-  .action-group {
-    gap: 14px;
-  }
-
-  .button {
-    width: 100%;
-  }
-
-  .table-wrapper {
-    margin-top: 20px;
-  }
-
-  table,
-  thead,
-  tbody,
-  th,
-  td,
-  tr {
-    display: block;
-    width: 100%;
-  }
-
-  thead {
-    position: absolute;
-    left: -9999px;
-    top: -9999px;
-  }
-
-  tr {
-    margin-bottom: 16px;
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-    overflow: hidden;
-  }
-
-  td {
-    border: none;
-    padding: 14px 16px;
-    position: relative;
-  }
-
-  td::before {
-    position: absolute;
-    left: 16px;
-    top: 14px;
-    width: calc(100% - 32px);
-    font-weight: 700;
-    color: #475569;
-    content: attr(data-label);
-  }
-
-  td:nth-of-type(1)::before { content: "名前"; }
-  td:nth-of-type(2)::before { content: "使用日"; }
-  td:nth-of-type(3)::before { content: "使用時間"; }
-  td:nth-of-type(4)::before { content: "削除"; }
-
-  td {
-    padding-top: 34px;
-  }
-
-  td:last-child {
-    padding-bottom: 18px;
-  }
-}
-
-@media (min-width: 720px) {
-  .form-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .field.wide {
-    grid-column: 1 / -1;
-  }
-
-  .action-group {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .button {
-    width: auto;
-    min-width: 140px;
-  }
-}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>防塵マスク管理システム（モバイル対応）</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <section class="card" aria-labelledby="title">
+      <h1 id="title">防塵マスク管理システム</h1>
+
+      <form id="mask-form" class="form-grid" autocomplete="off">
+        <div class="field">
+          <label for="name">名前</label>
+          <select id="name" required>
+            <option value="">選択してください</option>
+            <option value="比多岡">比多岡</option>
+            <option value="石黒">石黒</option>
+            <option value="岳">岳</option>
+            <option value="佃">佃</option>
+            <option value="横家">横家</option>
+            <option value="中川">中川</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="date">使用日</label>
+          <input id="date" type="date" required />
+        </div>
+
+        <div class="field wide">
+          <label>使用時間</label>
+          <div class="time-inputs">
+            <div class="time-field">
+              <input id="hours" type="number" min="0" step="1" value="0" inputmode="numeric" />
+              <span>時間</span>
+            </div>
+            <div class="time-field">
+              <input id="minutes" type="number" min="0" max="59" step="1" value="0" inputmode="numeric" />
+              <span>分</span>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <p id="selected-user" class="selected-user" aria-live="polite">名前を選択すると個別表示されます。</p>
+
+      <div class="status-grid" role="region" aria-label="使用時間サマリー">
+        <div class="status-card">
+          <p class="status-label">合計使用時間</p>
+          <p id="total-time" class="status-value">0時間 0分</p>
+        </div>
+        <div class="status-card">
+          <p class="status-label">残り使用時間</p>
+          <p id="remaining-time" class="status-value">15時間 0分</p>
+        </div>
+      </div>
+
+      <div class="progress-card" aria-hidden="false">
+        <div class="progress-bar" aria-hidden="true">
+          <div id="progress-fill" class="progress-fill" style="width:0%"></div>
+        </div>
+        <div id="progress-label" class="progress-label" aria-live="polite">0%</div>
+      </div>
+
+      <div id="exchange-message" class="exchange-message" role="status" aria-live="polite">申請時間が15時間に達しました。マスクを交換してください。</div>
+
+      <div class="action-group">
+        <button id="exchange-button" class="button exchange-button hidden" type="button">交換</button>
+        <button id="add-button" class="button primary-button" type="button">登録</button>
+      </div>
+
+      <section class="history-section">
+        <h2>使用履歴</h2>
+        <div class="table-wrapper">
+          <table aria-describedby="usage-history">
+            <thead>
+              <tr>
+                <th>名前</th>
+                <th>使用日</th>
+                <th>使用時間</th>
+                <th>削除</th>
+              </tr>
+            </thead>
+            <tbody id="history-body">
+              <tr class="empty-row">
+                <td colspan="4">まだ登録されていません</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </div>
+
+  <script>
+    // 最大分数（15時間）
+    const maxMinutes = 15 * 60;
+    // localStorage に保存
+    let records = JSON.parse(localStorage.getItem("maskRecords") || "[]");
+
+    const nameInput = document.getElementById("name");
+    const dateInput = document.getElementById("date");
+    const hoursInput = document.getElementById("hours");
+    const minutesInput = document.getElementById("minutes");
+    const totalTime = document.getElementById("total-time");
+    const remainingTime = document.getElementById("remaining-time");
+    const progressFill = document.getElementById("progress-fill");
+    const progressLabel = document.getElementById("progress-label");
+    const historyBody = document.getElementById("history-body");
+    const exchangeButton = document.getElementById("exchange-button");
+    const addButton = document.getElementById("add-button");
+    const exchangeMessage = document.getElementById("exchange-message");
+    const selectedUserLabel = document.getElementById("selected-user");
+
+    // set default date to today (YYYY-MM-DD)
+    const _today = new Date();
+    const _yyyy = _today.getFullYear();
+    const _mm = String(_today.getMonth() + 1).padStart(2, "0");
+    const _dd = String(_today.getDate()).padStart(2, "0");
+    const todayStr = `${_yyyy}-${_mm}-${_dd}`;
+    dateInput.value = todayStr;
+
+    function persist() {
+      localStorage.setItem("maskRecords", JSON.stringify(records));
+    }
+
+    function formatTime(minutes) {
+      const hours = Math.floor(minutes / 60);
+      const mins = minutes % 60;
+      return `${hours}時間 ${mins}分`;
+    }
+
+    function getSelectedRecords() {
+      const selectedName = nameInput.value.trim();
+      return selectedName ? records.filter((record) => record.name === selectedName) : [];
+    }
+
+    function updateSummary() {
+      const selectedName = nameInput.value.trim();
+      const selectedRecords = getSelectedRecords();
+      const total = selectedRecords.reduce((sum, record) => sum + (record.hours * 60 + record.minutes), 0);
+      const remaining = Math.max(maxMinutes - total, 0);
+      const progress = Number.isFinite(total) ? Math.min((total / maxMinutes) * 100, 100) : 0;
+      const showExchange = total >= maxMinutes && selectedRecords.length > 0;
+
+      selectedUserLabel.textContent = selectedName ? `${selectedName} さんの個別使用状況` : "名前を選択すると個別表示されます。";
+      exchangeMessage.textContent = total > maxMinutes
+        ? "合計使用時間が15時間を超えました。マスクを交換してください。"
+        : "申請時間が15時間に達しました。マスクを交換してください。";
+
+      totalTime.textContent = formatTime(total);
+      remainingTime.textContent = formatTime(remaining);
+
+      progressFill.style.width = `${progress}%`;
+      progressFill.className = `progress-fill ${progress >= 100 ? "danger" : progress >= 80 ? "warning" : "normal"}`;
+      progressLabel.textContent = `${progress.toFixed(1)}%`;
+
+      exchangeMessage.classList.toggle("visible", showExchange);
+      exchangeButton.classList.toggle("hidden", !showExchange);
+      exchangeButton.classList.toggle("visible", showExchange);
+    }
+
+    function renderHistory() {
+      const selectedRecords = getSelectedRecords();
+      historyBody.innerHTML = "";
+      if (selectedRecords.length === 0) {
+        const tr = document.createElement("tr");
+        tr.className = "empty-row";
+        const td = document.createElement("td");
+        td.colSpan = 4;
+        td.textContent = "まだ登録されていません";
+        tr.appendChild(td);
+        historyBody.appendChild(tr);
+        return;
+      }
+
+      const frag = document.createDocumentFragment();
+      selectedRecords.forEach((record) => {
+        const row = document.createElement("tr");
+
+        const tdName = document.createElement("td");
+        tdName.textContent = record.name;
+        row.appendChild(tdName);
+
+        const tdDate = document.createElement("td");
+        tdDate.textContent = record.date;
+        row.appendChild(tdDate);
+
+        const tdTime = document.createElement("td");
+        tdTime.textContent = `${record.hours}時間 ${record.minutes}分`;
+        row.appendChild(tdTime);
+
+        const tdDel = document.createElement("td");
+        const delBtn = document.createElement("button");
+        delBtn.type = "button";
+        delBtn.className = "delete-button";
+        delBtn.dataset.id = String(record.id);
+        delBtn.textContent = "削除";
+        tdDel.appendChild(delBtn);
+        row.appendChild(tdDel);
+
+        frag.appendChild(row);
+      });
+      historyBody.appendChild(frag);
+    }
+
+    function sanitizeInt(value, fallback = 0) {
+      const n = parseInt(String(value).trim(), 10);
+      return Number.isFinite(n) ? n : fallback;
+    }
+
+    function addRecord() {
+      const name = nameInput.value.trim();
+      const date = dateInput.value;
+      let hours = sanitizeInt(hoursInput.value, 0);
+      let minutes = sanitizeInt(minutesInput.value, 0);
+
+      if (hours < 0) hours = 0;
+      if (minutes < 0) minutes = 0;
+      if (minutes > 59) minutes = 59;
+
+      const totalMinutes = hours * 60 + minutes;
+      const currentTotal = getSelectedRecords().reduce((sum, record) => sum + (record.hours * 60 + record.minutes), 0);
+
+      if (!name) {
+        alert("名前を選択してください。");
+        return;
+      }
+      if (!date) {
+        alert("使用日を入力してください。");
+        return;
+      }
+      if (totalMinutes <= 0) {
+        alert("使用時間を入力してください。");
+        return;
+      }
+
+      // 変更：15時間を超えても登録し、交換メッセージを表示する
+      const id = Date.now() + Math.floor(Math.random() * 1000);
+
+      records.push({
+        id,
+        name,
+        date,
+        hours,
+        minutes,
+      });
+
+      persist();
+
+      // 日付は今日に戻すが、名前は残す（連続登録を想定）
+      dateInput.value = todayStr;
+      hoursInput.value = "0";
+      minutesInput.value = "0";
+
+      updateSummary();
+      renderHistory();
+    }
+
+    historyBody.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!target.matches(".delete-button")) return;
+      const id = Number(target.dataset.id);
+      const index = records.findIndex((record) => record.id === id);
+      if (index !== -1) {
+        records.splice(index, 1);
+        persist();
+        updateSummary();
+        renderHistory();
+      }
+    });
+
+    function exchangeMask() {
+      const selectedName = nameInput.value.trim();
+      if (!selectedName) {
+        alert("交換する名前を選択してください。");
+        return;
+      }
+
+      const removedCount = records.filter((record) => record.name === selectedName).length;
+      if (removedCount === 0) {
+        alert("現在登録されている使用時間がありません。");
+        return;
+      }
+
+      if (!confirm(`${selectedName} さんの使用時間をリセットしてよろしいですか？`)) {
+        return;
+      }
+
+      records = records.filter((record) => record.name !== selectedName);
+      persist();
+      updateSummary();
+      renderHistory();
+      alert(`${selectedName} さんの使用時間をリセットしました。マスクを交換してください。`);
+    }
+
+    nameInput.addEventListener("change", () => {
+      updateSummary();
+      renderHistory();
+    });
+
+    exchangeButton.addEventListener("click", () => {
+      exchangeMask();
+    });
+
+    addButton.addEventListener("click", () => {
+      addRecord();
+    });
+
+    // 初期描画
+    updateSummary();
+    renderHistory();
+  </script>
+</body>
+</html>
