@@ -1,7 +1,7 @@
 :root {
   color-scheme: light;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  --bg: #eff6ff;
+  --bg: #eef5ff;
   --surface: #ffffff;
   --surface-soft: rgba(255, 255, 255, 0.98);
   --primary: #2563eb;
@@ -10,10 +10,10 @@
   --warning: #f59e0b;
   --muted: #64748b;
   --border: #cbd5e1;
-  --radius: 28px;
-  --radius-sm: 18px;
-  --gap: 18px;
-  --max-width: 980px;
+  --radius: 26px;
+  --radius-sm: 16px;
+  --gap: 16px;
+  --max-width: 720px;
 }
 
 * {
@@ -27,7 +27,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(180deg, #ebf4ff 0%, #f8fafc 60%, #ffffff 100%);
+  background: linear-gradient(180deg, #eef5ff 0%, #f8fafc 70%, #ffffff 100%);
   color: #0f172a;
   font-family: inherit;
 }
@@ -49,15 +49,15 @@ select {
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 28px 20px 40px;
+  padding: 22px 16px 32px;
 }
 
 .card {
   background: var(--surface-soft);
-  border-radius: var(--radius);
-  padding: 32px;
+  border-radius: calc(var(--radius) - 4px);
+  padding: 28px;
   border: 1px solid rgba(226, 232, 240, 0.85);
-  box-shadow: 0 28px 90px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.08);
 }
 
 h1,
@@ -75,6 +75,7 @@ h1 {
 .form-grid {
   display: grid;
   gap: var(--gap);
+  grid-template-columns: 1fr;
 }
 
 .field {
@@ -284,7 +285,6 @@ button[disabled] {
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px;
 }
 
 thead th {
@@ -327,6 +327,71 @@ tbody td {
 
   .time-inputs {
     flex-direction: column;
+  }
+
+  .action-group {
+    gap: 14px;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .table-wrapper {
+    margin-top: 20px;
+  }
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+    width: 100%;
+  }
+
+  thead {
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+  }
+
+  tr {
+    margin-bottom: 16px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+  }
+
+  td {
+    border: none;
+    padding: 14px 16px;
+    position: relative;
+  }
+
+  td::before {
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    width: calc(100% - 32px);
+    font-weight: 700;
+    color: #475569;
+    content: attr(data-label);
+  }
+
+  td:nth-of-type(1)::before { content: "名前"; }
+  td:nth-of-type(2)::before { content: "使用日"; }
+  td:nth-of-type(3)::before { content: "使用時間"; }
+  td:nth-of-type(4)::before { content: "削除"; }
+
+  td {
+    padding-top: 34px;
+  }
+
+  td:last-child {
+    padding-bottom: 18px;
   }
 }
 
