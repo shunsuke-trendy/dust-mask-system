@@ -3,316 +3,721 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>防塵マスク管理システム（モバイル対応）</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="wrap">
-    <section class="card" aria-labelledby="title">
-      <h1 id="title">防塵マスク管理システム</h1>
+  <title>防塵マスク管理システム</title>
 
-      <form id="mask-form" class="form-grid" autocomplete="off">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f4f7fb;
+      font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+      color: #1e293b;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      font-size: 32px;
+      line-height: 1.4;
+      font-weight: 800;
+      word-break: keep-all;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      font-size: 22px;
+    }
+
+    .form-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .field label {
+      margin-bottom: 8px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      height: 56px;
+      border: 1px solid #d6dee8;
+      border-radius: 16px;
+      padding: 0 16px;
+      font-size: 16px;
+      background: white;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      outline: none;
+      border-color: #2563eb;
+    }
+
+    .time-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .time-field {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .time-field input {
+      flex: 1;
+    }
+
+    .time-field span {
+      width: 40px;
+      font-weight: 700;
+      color: #64748b;
+    }
+
+    .selected-user {
+      margin-top: 20px;
+      background: #eff6ff;
+      border-radius: 16px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .status-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .status-card {
+      background: #ffffff;
+      border: 1px solid #dbe4ee;
+      border-radius: 18px;
+      padding: 18px;
+      text-align: center;
+    }
+
+    .status-label {
+      margin: 0;
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .status-value {
+      margin-top: 10px;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .progress-card {
+      margin-top: 20px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 16px;
+      background: #dbe4ee;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #2563eb;
+      border-radius: 999px;
+      transition: 0.3s;
+      width: 0%;
+    }
+
+    .progress-fill.warning {
+      background: #f59e0b;
+    }
+
+    .progress-fill.danger {
+      background: #dc2626;
+    }
+
+    .progress-label {
+      margin-top: 8px;
+      text-align: right;
+      font-weight: 700;
+    }
+
+    .exchange-message {
+      display: none;
+      margin-top: 18px;
+      padding: 14px;
+      background: #fef3c7;
+      color: #92400e;
+      border-radius: 16px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    .exchange-message.visible {
+      display: block;
+    }
+
+    .action-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .button {
+      width: 100%;
+      height: 54px;
+      border: none;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .primary-button {
+      background: #2563eb;
+      color: white;
+    }
+
+    .exchange-button {
+      background: #16a34a;
+      color: white;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .history-section {
+      margin-top: 32px;
+    }
+
+    .table-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    table,
+    thead,
+    tbody,
+    tr,
+    td {
+      display: block;
+      width: 100%;
+    }
+
+    thead {
+      display: none;
+    }
+
+    tr {
+      background: white;
+      border-radius: 18px;
+      padding: 14px;
+      border: 1px solid #dbe4ee;
+      margin-bottom: 12px;
+    }
+
+    td {
+      padding: 8px 0;
+      font-size: 15px;
+    }
+
+    td::before {
+      display: block;
+      margin-bottom: 4px;
+      color: #64748b;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    td:nth-child(1)::before {
+      content: "名前";
+    }
+
+    td:nth-child(2)::before {
+      content: "使用日";
+    }
+
+    td:nth-child(3)::before {
+      content: "使用時間";
+    }
+
+    td:nth-child(4)::before {
+      content: "操作";
+    }
+
+    .delete-button {
+      width: 100%;
+      height: 42px;
+      border: none;
+      border-radius: 14px;
+      background: #dc2626;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    @media (min-width: 768px) {
+
+      .wrap {
+        max-width: 900px;
+      }
+
+      .status-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .time-inputs {
+        flex-direction: row;
+      }
+
+      .action-group {
+        flex-direction: row;
+      }
+
+      .button {
+        width: 180px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrap">
+
+    <div class="card">
+
+      <h1>防塵マスク管理システム</h1>
+
+      <div class="form-grid">
+
         <div class="field">
-          <label for="name">名前</label>
-          <select id="name" required>
+          <label>名前</label>
+
+          <select id="name">
             <option value="">選択してください</option>
-            <option value="比多岡">比多岡</option>
-            <option value="石黒">石黒</option>
-            <option value="岳">岳</option>
-            <option value="佃">佃</option>
-            <option value="横家">横家</option>
-            <option value="中川">中川</option>
+            <option>比多岡</option>
+            <option>石黒</option>
+            <option>岳</option>
+            <option>佃</option>
+            <option>横家</option>
+            <option>中川</option>
           </select>
         </div>
 
         <div class="field">
-          <label for="date">使用日</label>
-          <input id="date" type="date" required />
+          <label>使用日</label>
+          <input type="date" id="date">
         </div>
 
-        <div class="field wide">
+        <div class="field">
           <label>使用時間</label>
+
           <div class="time-inputs">
+
             <div class="time-field">
-              <input id="hours" type="number" min="0" step="1" value="0" inputmode="numeric" />
+              <input type="number" id="hours" value="0" min="0">
               <span>時間</span>
             </div>
+
             <div class="time-field">
-              <input id="minutes" type="number" min="0" max="59" step="1" value="0" inputmode="numeric" />
+              <input type="number" id="minutes" value="0" min="0" max="59">
               <span>分</span>
             </div>
+
           </div>
         </div>
-      </form>
 
-      <p id="selected-user" class="selected-user" aria-live="polite">名前を選択すると個別表示されます。</p>
+      </div>
 
-      <div class="status-grid" role="region" aria-label="使用時間サマリー">
+      <div id="selected-user" class="selected-user">
+        名前を選択すると個別表示されます。
+      </div>
+
+      <div class="status-grid">
+
         <div class="status-card">
           <p class="status-label">合計使用時間</p>
           <p id="total-time" class="status-value">0時間 0分</p>
         </div>
+
         <div class="status-card">
           <p class="status-label">残り使用時間</p>
           <p id="remaining-time" class="status-value">15時間 0分</p>
         </div>
+
       </div>
 
-      <div class="progress-card" aria-hidden="false">
-        <div class="progress-bar" aria-hidden="true">
-          <div id="progress-fill" class="progress-fill" style="width:0%"></div>
+      <div class="progress-card">
+
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill"></div>
         </div>
-        <div id="progress-label" class="progress-label" aria-live="polite">0%</div>
+
+        <div id="progress-label" class="progress-label">
+          0%
+        </div>
+
       </div>
 
-      <div id="exchange-message" class="exchange-message" role="status" aria-live="polite">申請時間が15時間に達しました。マスクを交換してください。</div>
+      <div id="exchange-message" class="exchange-message">
+        15時間に達しました。マスクを交換してください。
+      </div>
 
       <div class="action-group">
-        <button id="exchange-button" class="button exchange-button hidden" type="button">交換</button>
-        <button id="add-button" class="button primary-button" type="button">登録</button>
+
+        <button id="exchange-button" class="button exchange-button hidden">
+          交換
+        </button>
+
+        <button id="add-button" class="button primary-button">
+          登録
+        </button>
+
       </div>
 
-      <section class="history-section">
+      <div class="history-section">
+
         <h2>使用履歴</h2>
+
         <div class="table-wrapper">
-          <table aria-describedby="usage-history">
-            <thead>
-              <tr>
-                <th>名前</th>
-                <th>使用日</th>
-                <th>使用時間</th>
-                <th>削除</th>
-              </tr>
-            </thead>
+
+          <table>
+
             <tbody id="history-body">
-              <tr class="empty-row">
-                <td colspan="4">まだ登録されていません</td>
+
+              <tr>
+                <td>まだ登録されていません</td>
               </tr>
+
             </tbody>
+
           </table>
+
         </div>
-      </section>
-    </section>
+
+      </div>
+
+    </div>
+
   </div>
 
   <script>
-    // 最大分数（15時間）
+
     const maxMinutes = 15 * 60;
-    // localStorage に保存
-    let records = JSON.parse(localStorage.getItem("maskRecords") || "[]");
 
-    const nameInput = document.getElementById("name");
-    const dateInput = document.getElementById("date");
-    const hoursInput = document.getElementById("hours");
-    const minutesInput = document.getElementById("minutes");
-    const totalTime = document.getElementById("total-time");
-    const remainingTime = document.getElementById("remaining-time");
-    const progressFill = document.getElementById("progress-fill");
-    const progressLabel = document.getElementById("progress-label");
-    const historyBody = document.getElementById("history-body");
-    const exchangeButton = document.getElementById("exchange-button");
-    const addButton = document.getElementById("add-button");
-    const exchangeMessage = document.getElementById("exchange-message");
-    const selectedUserLabel = document.getElementById("selected-user");
+    let records =
+      JSON.parse(localStorage.getItem("maskRecords") || "[]");
 
-    // set default date to today (YYYY-MM-DD)
-    const _today = new Date();
-    const _yyyy = _today.getFullYear();
-    const _mm = String(_today.getMonth() + 1).padStart(2, "0");
-    const _dd = String(_today.getDate()).padStart(2, "0");
-    const todayStr = `${_yyyy}-${_mm}-${_dd}`;
-    dateInput.value = todayStr;
+    const nameInput =
+      document.getElementById("name");
 
-    function persist() {
-      localStorage.setItem("maskRecords", JSON.stringify(records));
+    const dateInput =
+      document.getElementById("date");
+
+    const hoursInput =
+      document.getElementById("hours");
+
+    const minutesInput =
+      document.getElementById("minutes");
+
+    const totalTime =
+      document.getElementById("total-time");
+
+    const remainingTime =
+      document.getElementById("remaining-time");
+
+    const progressFill =
+      document.getElementById("progress-fill");
+
+    const progressLabel =
+      document.getElementById("progress-label");
+
+    const historyBody =
+      document.getElementById("history-body");
+
+    const exchangeButton =
+      document.getElementById("exchange-button");
+
+    const exchangeMessage =
+      document.getElementById("exchange-message");
+
+    const selectedUser =
+      document.getElementById("selected-user");
+
+    const today = new Date()
+      .toISOString()
+      .split("T")[0];
+
+    dateInput.value = today;
+
+    function saveData() {
+
+      localStorage.setItem(
+        "maskRecords",
+        JSON.stringify(records)
+      );
     }
 
-    function formatTime(minutes) {
-      const hours = Math.floor(minutes / 60);
-      const mins = minutes % 60;
-      return `${hours}時間 ${mins}分`;
+    function formatTime(totalMinutes) {
+
+      const h =
+        Math.floor(totalMinutes / 60);
+
+      const m =
+        totalMinutes % 60;
+
+      return `${h}時間 ${m}分`;
     }
 
-    function getSelectedRecords() {
-      const selectedName = nameInput.value.trim();
-      return selectedName ? records.filter((record) => record.name === selectedName) : [];
+    function getUserRecords() {
+
+      const name =
+        nameInput.value;
+
+      return records.filter(
+        record => record.name === name
+      );
     }
 
-    function updateSummary() {
-      const selectedName = nameInput.value.trim();
-      const selectedRecords = getSelectedRecords();
-      const total = selectedRecords.reduce((sum, record) => sum + (record.hours * 60 + record.minutes), 0);
-      const remaining = Math.max(maxMinutes - total, 0);
-      const progress = Number.isFinite(total) ? Math.min((total / maxMinutes) * 100, 100) : 0;
-      const showExchange = total >= maxMinutes && selectedRecords.length > 0;
+    function updateUI() {
 
-      selectedUserLabel.textContent = selectedName ? `${selectedName} さんの個別使用状況` : "名前を選択すると個別表示されます。";
-      exchangeMessage.textContent = total > maxMinutes
-        ? "合計使用時間が15時間を超えました。マスクを交換してください。"
-        : "申請時間が15時間に達しました。マスクを交換してください。";
+      const selected =
+        getUserRecords();
 
-      totalTime.textContent = formatTime(total);
-      remainingTime.textContent = formatTime(remaining);
+      const total =
+        selected.reduce((sum, record) => {
 
-      progressFill.style.width = `${progress}%`;
-      progressFill.className = `progress-fill ${progress >= 100 ? "danger" : progress >= 80 ? "warning" : "normal"}`;
-      progressLabel.textContent = `${progress.toFixed(1)}%`;
+          return sum +
+            (record.hours * 60) +
+            record.minutes;
 
-      exchangeMessage.classList.toggle("visible", showExchange);
-      exchangeButton.classList.toggle("hidden", !showExchange);
-      exchangeButton.classList.toggle("visible", showExchange);
+        }, 0);
+
+      const remain =
+        Math.max(maxMinutes - total, 0);
+
+      const progress =
+        Math.min((total / maxMinutes) * 100, 100);
+
+      totalTime.textContent =
+        formatTime(total);
+
+      remainingTime.textContent =
+        formatTime(remain);
+
+      progressFill.style.width =
+        `${progress}%`;
+
+      progressLabel.textContent =
+        `${progress.toFixed(1)}%`;
+
+      progressFill.className =
+        "progress-fill";
+
+      if (progress >= 100) {
+
+        progressFill.classList.add("danger");
+
+      } else if (progress >= 80) {
+
+        progressFill.classList.add("warning");
+      }
+
+      if (total >= maxMinutes) {
+
+        exchangeMessage.classList.add("visible");
+
+        exchangeButton.classList.remove("hidden");
+
+      } else {
+
+        exchangeMessage.classList.remove("visible");
+
+        exchangeButton.classList.add("hidden");
+      }
+
+      if (nameInput.value) {
+
+        selectedUser.textContent =
+          `${nameInput.value} さんの個別表示`;
+
+      } else {
+
+        selectedUser.textContent =
+          "名前を選択すると個別表示されます。";
+      }
+
+      renderHistory();
     }
 
     function renderHistory() {
-      const selectedRecords = getSelectedRecords();
+
+      const selected =
+        getUserRecords();
+
       historyBody.innerHTML = "";
-      if (selectedRecords.length === 0) {
-        const tr = document.createElement("tr");
-        tr.className = "empty-row";
-        const td = document.createElement("td");
-        td.colSpan = 4;
-        td.textContent = "まだ登録されていません";
-        tr.appendChild(td);
-        historyBody.appendChild(tr);
+
+      if (selected.length === 0) {
+
+        historyBody.innerHTML =
+          `
+          <tr>
+            <td>
+              まだ登録されていません
+            </td>
+          </tr>
+          `;
+
         return;
       }
 
-      const frag = document.createDocumentFragment();
-      selectedRecords.forEach((record) => {
-        const row = document.createElement("tr");
+      selected.forEach(record => {
 
-        const tdName = document.createElement("td");
-        tdName.textContent = record.name;
-        row.appendChild(tdName);
+        const tr =
+          document.createElement("tr");
 
-        const tdDate = document.createElement("td");
-        tdDate.textContent = record.date;
-        row.appendChild(tdDate);
+        tr.innerHTML =
+          `
+          <td>${record.name}</td>
+          <td>${record.date}</td>
+          <td>${record.hours}時間 ${record.minutes}分</td>
+          <td>
+            <button
+              class="delete-button"
+              onclick="deleteRecord(${record.id})"
+            >
+              削除
+            </button>
+          </td>
+          `;
 
-        const tdTime = document.createElement("td");
-        tdTime.textContent = `${record.hours}時間 ${record.minutes}分`;
-        row.appendChild(tdTime);
+        historyBody.appendChild(tr);
 
-        const tdDel = document.createElement("td");
-        const delBtn = document.createElement("button");
-        delBtn.type = "button";
-        delBtn.className = "delete-button";
-        delBtn.dataset.id = String(record.id);
-        delBtn.textContent = "削除";
-        tdDel.appendChild(delBtn);
-        row.appendChild(tdDel);
-
-        frag.appendChild(row);
       });
-      historyBody.appendChild(frag);
-    }
-
-    function sanitizeInt(value, fallback = 0) {
-      const n = parseInt(String(value).trim(), 10);
-      return Number.isFinite(n) ? n : fallback;
     }
 
     function addRecord() {
-      const name = nameInput.value.trim();
-      const date = dateInput.value;
-      let hours = sanitizeInt(hoursInput.value, 0);
-      let minutes = sanitizeInt(minutesInput.value, 0);
 
-      if (hours < 0) hours = 0;
-      if (minutes < 0) minutes = 0;
-      if (minutes > 59) minutes = 59;
+      const name =
+        nameInput.value;
 
-      const totalMinutes = hours * 60 + minutes;
-      const currentTotal = getSelectedRecords().reduce((sum, record) => sum + (record.hours * 60 + record.minutes), 0);
+      const date =
+        dateInput.value;
+
+      const hours =
+        Number(hoursInput.value);
+
+      const minutes =
+        Number(minutesInput.value);
 
       if (!name) {
-        alert("名前を選択してください。");
-        return;
-      }
-      if (!date) {
-        alert("使用日を入力してください。");
-        return;
-      }
-      if (totalMinutes <= 0) {
-        alert("使用時間を入力してください。");
+
+        alert("名前を選択してください");
         return;
       }
 
-      // 変更：15時間を超えても登録し、交換メッセージを表示する
-      const id = Date.now() + Math.floor(Math.random() * 1000);
+      if ((hours * 60 + minutes) <= 0) {
+
+        alert("使用時間を入力してください");
+        return;
+      }
 
       records.push({
-        id,
+
+        id: Date.now(),
         name,
         date,
         hours,
-        minutes,
+        minutes
+
       });
 
-      persist();
+      saveData();
 
-      // 日付は今日に戻すが、名前は残す（連続登録を想定）
-      dateInput.value = todayStr;
-      hoursInput.value = "0";
-      minutesInput.value = "0";
+      hoursInput.value = 0;
+      minutesInput.value = 0;
 
-      updateSummary();
-      renderHistory();
+      updateUI();
     }
 
-    historyBody.addEventListener("click", (event) => {
-      const target = event.target;
-      if (!target.matches(".delete-button")) return;
-      const id = Number(target.dataset.id);
-      const index = records.findIndex((record) => record.id === id);
-      if (index !== -1) {
-        records.splice(index, 1);
-        persist();
-        updateSummary();
-        renderHistory();
-      }
-    });
+    function deleteRecord(id) {
+
+      records =
+        records.filter(
+          record => record.id !== id
+        );
+
+      saveData();
+
+      updateUI();
+    }
 
     function exchangeMask() {
-      const selectedName = nameInput.value.trim();
-      if (!selectedName) {
-        alert("交換する名前を選択してください。");
-        return;
-      }
 
-      const removedCount = records.filter((record) => record.name === selectedName).length;
-      if (removedCount === 0) {
-        alert("現在登録されている使用時間がありません。");
-        return;
-      }
+      const name =
+        nameInput.value;
 
-      if (!confirm(`${selectedName} さんの使用時間をリセットしてよろしいですか？`)) {
-        return;
-      }
+      if (!name) return;
 
-      records = records.filter((record) => record.name !== selectedName);
-      persist();
-      updateSummary();
-      renderHistory();
-      alert(`${selectedName} さんの使用時間をリセットしました。マスクを交換してください。`);
+      records =
+        records.filter(
+          record => record.name !== name
+        );
+
+      saveData();
+
+      updateUI();
+
+      alert("交換しました");
     }
 
-    nameInput.addEventListener("change", () => {
-      updateSummary();
-      renderHistory();
-    });
+    document
+      .getElementById("add-button")
+      .addEventListener("click", addRecord);
 
-    exchangeButton.addEventListener("click", () => {
-      exchangeMask();
-    });
+    exchangeButton
+      .addEventListener("click", exchangeMask);
 
-    addButton.addEventListener("click", () => {
-      addRecord();
-    });
+    nameInput
+      .addEventListener("change", updateUI);
 
-    // 初期描画
-    updateSummary();
-    renderHistory();
+    updateUI();
+
   </script>
+
 </body>
 </html>
