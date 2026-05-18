@@ -1,81 +1,69 @@
 :root {
-  color-scheme: light;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  --bg: #eef5ff;
-  --surface: #ffffff;
-  --surface-soft: rgba(255, 255, 255, 0.98);
+  --bg: #f3f6fb;
+  --card: #ffffff;
   --primary: #2563eb;
-  --primary-strong: #1d4ed8;
+  --primary-dark: #1d4ed8;
   --danger: #dc2626;
-  --warning: #f59e0b;
-  --muted: #64748b;
-  --border: #cbd5e1;
-  --radius: 26px;
-  --radius-sm: 16px;
-  --gap: 16px;
-  --max-width: 720px;
+  --success: #16a34a;
+  --text: #0f172a;
+  --sub: #64748b;
+  --border: #dbe2ea;
+  --radius: 20px;
 }
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
-  scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
   margin: 0;
-  min-height: 100vh;
-  background: linear-gradient(180deg, #eef5ff 0%, #f8fafc 70%, #ffffff 100%);
-  color: #0f172a;
-  font-family: inherit;
+  padding: 0;
+  background: var(--bg);
+  font-family:
+    "Hiragino Sans",
+    "Noto Sans JP",
+    sans-serif;
+  color: var(--text);
 }
 
-body,
-button,
-input,
-select {
-  font-family: inherit;
-}
-
-button,
-input,
-select {
-  font: inherit;
-}
-
-.wrap,
-.container {
-  max-width: var(--max-width);
+.wrap {
+  width: 100%;
+  max-width: 520px;
   margin: 0 auto;
-  padding: 22px 16px 32px;
+  padding: 16px;
 }
 
 .card {
-  background: var(--surface-soft);
-  border-radius: calc(var(--radius) - 4px);
-  padding: 28px;
-  border: 1px solid rgba(226, 232, 240, 0.85);
-  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.08);
-}
-
-h1,
-h2 {
-  margin: 0;
+  background: var(--card);
+  border-radius: 28px;
+  padding: 24px 18px;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.06);
 }
 
 h1 {
-  font-size: clamp(1.8rem, 2.4vw, 2.6rem);
-  letter-spacing: 0.02em;
-  margin-bottom: 24px;
-  color: #0f172a;
+  margin: 0 0 28px;
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.4;
+  letter-spacing: 0;
+  word-break: keep-all;
+}
+
+h2 {
+  margin: 0 0 18px;
+  font-size: 1.2rem;
 }
 
 .form-grid {
-  display: grid;
-  gap: var(--gap);
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .field {
@@ -85,112 +73,112 @@ h1 {
 }
 
 .field label {
+  font-size: 1rem;
   font-weight: 700;
-  color: #334155;
 }
 
 .field input,
 .field select {
   width: 100%;
-  min-height: 52px;
-  padding: 14px 16px;
+  height: 56px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: #f8fafc;
-  color: #0f172a;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  border-radius: 18px;
+  padding: 0 16px;
+  background: #fff;
+  font-size: 1rem;
+  color: var(--text);
 }
 
 .field input:focus,
 .field select:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
-  background: #ffffff;
+  box-shadow:
+    0 0 0 4px rgba(37,99,235,0.12);
 }
 
 .time-inputs {
   display: flex;
+  flex-direction: column;
   gap: 14px;
-  flex-wrap: wrap;
 }
 
 .time-field {
   display: flex;
   align-items: center;
-  gap: 10px;
-  flex: 1;
-  min-width: 120px;
+  gap: 12px;
 }
 
 .time-field input {
-  width: 100%;
+  flex: 1;
 }
 
-.wide {
-  grid-column: 1 / -1;
+.time-field span {
+  width: 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--sub);
 }
 
 .selected-user {
-  margin: 0 0 18px;
-  color: #0f172a;
-  font-weight: 700;
+  margin-top: 20px;
   background: #eff6ff;
-  padding: 16px 18px;
-  border-radius: 22px;
   border: 1px solid #dbeafe;
+  border-radius: 18px;
+  padding: 14px 16px;
+  font-weight: 700;
+  line-height: 1.6;
 }
 
 .status-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 22px;
 }
 
 .status-card {
-  border: 1px solid rgba(59, 130, 246, 0.12);
-  border-radius: 24px;
-  padding: 22px 20px;
-  background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
   text-align: center;
 }
 
 .status-label {
   margin: 0;
-  color: var(--muted);
-  font-weight: 600;
+  color: var(--sub);
+  font-size: 0.95rem;
 }
 
 .status-value {
-  margin: 12px 0 0;
-  font-size: 1.15rem;
-  font-weight: 700;
+  margin: 10px 0 0;
+  font-size: 1.3rem;
+  font-weight: 800;
 }
 
 .progress-card {
-  margin-bottom: 24px;
+  margin-top: 24px;
 }
 
 .progress-bar {
   width: 100%;
   height: 18px;
-  border-radius: 999px;
   background: #e2e8f0;
+  border-radius: 999px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  width: 0;
+  width: 0%;
   border-radius: 999px;
-  transition: width 0.35s ease, background-color 0.35s ease;
-  background: #2563eb;
+  transition: 0.3s;
+  background: var(--primary);
 }
 
 .progress-fill.warning {
-  background: var(--warning);
+  background: #f59e0b;
 }
 
 .progress-fill.danger {
@@ -198,20 +186,21 @@ h1 {
 }
 
 .progress-label {
-  margin-top: 8px;
+  margin-top: 10px;
   text-align: right;
   font-weight: 700;
 }
 
 .exchange-message {
-  margin: 18px 0 8px;
-  padding: 16px 18px;
-  border-radius: 18px;
+  display: none;
+  margin-top: 18px;
   background: #fef3c7;
   color: #92400e;
   border: 1px solid #f59e0b;
+  border-radius: 18px;
+  padding: 16px;
+  line-height: 1.6;
   font-weight: 700;
-  display: none;
 }
 
 .exchange-message.visible {
@@ -219,198 +208,189 @@ h1 {
 }
 
 .action-group {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 14px;
-  margin-top: 16px;
+  margin-top: 24px;
 }
 
 .button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-  min-height: 54px;
-  gap: 10px;
+  height: 56px;
   border: none;
   border-radius: 18px;
-  background: var(--primary);
-  color: #ffffff;
-  padding: 16px;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
-  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.18);
-  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  transition: 0.2s;
 }
 
-.button:hover {
-  background: var(--primary-strong);
-  transform: translateY(-1px);
-  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.22);
+.primary-button {
+  background: var(--primary);
+  color: white;
 }
 
-.button:disabled,
-button[disabled] {
-  opacity: 0.55;
-  cursor: not-allowed;
-  background: #94a3b8;
-  transform: none;
-  box-shadow: none;
+.primary-button:hover {
+  background: var(--primary-dark);
 }
 
 .exchange-button {
-  background: #16a34a;
+  background: var(--success);
+  color: white;
 }
 
 .exchange-button:hover {
   background: #15803d;
 }
 
-.button.hidden {
+.hidden {
   display: none;
 }
 
-.button.visible {
-  display: inline-flex;
-}
-
 .history-section {
-  margin-top: 30px;
+  margin-top: 32px;
 }
 
 .table-wrapper {
-  overflow-x: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-table {
+table,
+thead,
+tbody,
+tr,
+th,
+td {
+  display: block;
   width: 100%;
-  border-collapse: collapse;
 }
 
-thead th {
-  font-weight: 700;
-  text-align: left;
-  padding: 14px 16px;
-  color: #64748b;
+thead {
+  display: none;
+}
+
+tr {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+td {
+  border: none;
+  padding: 10px 0;
   font-size: 0.95rem;
-  background: #f8fafc;
+  word-break: break-word;
 }
 
-tbody td {
-  padding: 14px 16px;
-  border-top: 1px solid #e2e8f0;
-  color: #334155;
+td::before {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.82rem;
+  color: var(--sub);
+  font-weight: 700;
 }
 
-.empty-row td {
-  color: #64748b;
+td:nth-child(1)::before {
+  content: "名前";
+}
+
+td:nth-child(2)::before {
+  content: "使用日";
+}
+
+td:nth-child(3)::before {
+  content: "使用時間";
+}
+
+td:nth-child(4)::before {
+  content: "操作";
 }
 
 .delete-button {
-  background: #dc2626;
-  color: #ffffff;
-  padding: 10px 16px;
+  width: 100%;
+  height: 44px;
   border: none;
   border-radius: 14px;
+  background: var(--danger);
+  color: white;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s ease;
 }
 
-.delete-button:hover {
-  background: #b91c1c;
+.empty-row td::before {
+  content: "";
 }
 
-@media (max-width: 700px) {
-  .status-grid {
-    grid-template-columns: 1fr;
+@media (min-width: 768px) {
+
+  .wrap {
+    max-width: 760px;
   }
 
-  .time-inputs {
-    flex-direction: column;
-  }
-
-  .action-group {
-    gap: 14px;
-  }
-
-  .button {
-    width: 100%;
-  }
-
-  .table-wrapper {
-    margin-top: 20px;
-  }
-
-  table,
-  thead,
-  tbody,
-  th,
-  td,
-  tr {
-    display: block;
-    width: 100%;
-  }
-
-  thead {
-    position: absolute;
-    left: -9999px;
-    top: -9999px;
-  }
-
-  tr {
-    margin-bottom: 16px;
-    background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-    overflow: hidden;
-  }
-
-  td {
-    border: none;
-    padding: 14px 16px;
-    position: relative;
-  }
-
-  td::before {
-    position: absolute;
-    left: 16px;
-    top: 14px;
-    width: calc(100% - 32px);
-    font-weight: 700;
-    color: #475569;
-    content: attr(data-label);
-  }
-
-  td:nth-of-type(1)::before { content: "名前"; }
-  td:nth-of-type(2)::before { content: "使用日"; }
-  td:nth-of-type(3)::before { content: "使用時間"; }
-  td:nth-of-type(4)::before { content: "削除"; }
-
-  td {
-    padding-top: 34px;
-  }
-
-  td:last-child {
-    padding-bottom: 18px;
-  }
-}
-
-@media (min-width: 720px) {
   .form-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
   }
 
-  .field.wide {
+  .wide {
     grid-column: 1 / -1;
   }
 
+  .time-inputs {
+    flex-direction: row;
+  }
+
+  .status-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
   .action-group {
-    display: flex;
+    flex-direction: row;
     justify-content: flex-end;
   }
 
   .button {
+    width: 180px;
+  }
+
+  table {
+    display: table;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tbody {
+    display: table-row-group;
+  }
+
+  tr {
+    display: table-row;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  td,
+  th {
+    display: table-cell;
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td::before {
+    display: none;
+  }
+
+  .delete-button {
     width: auto;
-    min-width: 140px;
+    padding: 10px 18px;
   }
 }
