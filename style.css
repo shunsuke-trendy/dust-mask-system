@@ -130,8 +130,7 @@ h1 {
 
   padding: 0 16px;
 
-  border:
-    1px solid var(--border);
+  border: 1px solid var(--border);
 
   border-radius: 18px;
 
@@ -143,10 +142,13 @@ h1 {
 
   appearance: none;
   -webkit-appearance: none;
+
+  display: flex;
+  align-items: center;
 }
 
 /* ======================
-   日付入力
+   日付入力（スマホ対応）
 ====================== */
 
 input[type="date"] {
@@ -156,8 +158,7 @@ input[type="date"] {
 
   padding: 0 16px;
 
-  border:
-    1px solid var(--border);
+  border: 1px solid var(--border);
 
   border-radius: 18px;
 
@@ -169,22 +170,27 @@ input[type="date"] {
 
   color: var(--text);
 
-  appearance: none;
-  -webkit-appearance: none;
+  display: flex;
+  align-items: center;
+
+  line-height: 56px;
 
   position: relative;
+
+  appearance: none;
+  -webkit-appearance: none;
 }
 
-/* Safari / iPhone */
-
+/* iPhone Safari 対応 */
 input[type="date"]::-webkit-date-and-time-value {
   text-align: center;
 
-  width: 100%;
+  height: 56px;
+
+  line-height: 56px;
 }
 
-/* 年月日 */
-
+/* 年月日を中央 */
 input[type="date"]::-webkit-datetime-edit {
   display: flex;
 
@@ -198,26 +204,26 @@ input[type="date"]::-webkit-datetime-edit {
 }
 
 /* 年 */
-
 input[type="date"]::-webkit-datetime-edit-year-field {
   text-align: center;
 }
 
 /* 月 */
-
 input[type="date"]::-webkit-datetime-edit-month-field {
   text-align: center;
 }
 
 /* 日 */
-
 input[type="date"]::-webkit-datetime-edit-day-field {
   text-align: center;
 }
 
-/* カレンダー */
-
+/* カレンダーアイコン */
 input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+
+  right: 16px;
+
   opacity: 0.7;
 
   cursor: pointer;
