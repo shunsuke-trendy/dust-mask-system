@@ -66,10 +66,6 @@ h2 {
   background: #ffffff;
 }
 
-.field input[type="date"] {
-  max-width: 280px;
-}
-
 .field input:focus,
 .field select:focus {
   outline: none;
