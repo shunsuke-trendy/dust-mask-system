@@ -266,6 +266,8 @@
 
         exchangeButton.classList.remove("hidden");
 
+        warningModal.classList.remove("hidden");
+
         warningModal.classList.add("show");
 
       } else {
@@ -449,12 +451,16 @@
 
         warningModal.classList.remove("show");
 
+        warningModal.classList.add("hidden");
+
       });
 
     closeWarning
       .addEventListener("click", () => {
 
         warningModal.classList.remove("show");
+
+        warningModal.classList.add("hidden");
 
       });
 
@@ -466,7 +472,7 @@
        Windows風警告
   ====================== -->
 
-  <div id="warning-modal" class="warning-modal">
+  <div id="warning-modal" class="warning-modal hidden">
 
     <div class="warning-window">
 
@@ -488,8 +494,8 @@
       <div class="warning-body">
 
         <div class="warning-title">
-          ❌ Windowsセキュリティシステムが破損しています
-        </div>
+        ⚠️ 防塵マスクを交換してください
+      </div>
 
         <div class="warning-message">
 
