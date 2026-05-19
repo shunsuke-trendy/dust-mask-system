@@ -266,7 +266,7 @@
 
         exchangeButton.classList.remove("hidden");
 
-        warningModal.classList.remove("hidden");
+        warningModal.classList.add("show");
 
       } else {
 
@@ -274,7 +274,7 @@
 
         exchangeButton.classList.add("hidden");
 
-        warningModal.classList.add("hidden");
+        warningModal.classList.remove("show");
       }
 
       if (nameInput.value) {
@@ -375,6 +375,28 @@
 
       saveData();
 
+      const userRecords =
+        getUserRecords();
+
+      const totalMinutes =
+        userRecords.reduce((sum, record) => {
+
+          return sum +
+            (record.hours * 60) +
+            record.minutes;
+
+        }, 0) +
+        (hours * 60) +
+        minutes;
+
+      if (totalMinutes >= maxMinutes) {
+
+        alert(
+          "⚠️ 合計使用時間が15時間を超えました。\n\n防塵マスクを交換してください。"
+        );
+
+      }
+
       hoursInput.value = 0;
       minutesInput.value = 0;
 
@@ -425,14 +447,14 @@
     warningOk
       .addEventListener("click", () => {
 
-        warningModal.classList.add("hidden");
+        warningModal.classList.remove("show");
 
       });
 
     closeWarning
       .addEventListener("click", () => {
 
-        warningModal.classList.add("hidden");
+        warningModal.classList.remove("show");
 
       });
 
@@ -441,15 +463,18 @@
   </script>
 
   <!-- ======================
-       警告モーダル
+       Windows風警告
   ====================== -->
 
-  <div id="warning-modal" class="warning-modal hidden">
+  <div id="warning-modal" class="warning-modal">
 
     <div class="warning-window">
 
       <div class="warning-header">
-        <span>システム警告</span>
+
+        <div class="warning-header-title">
+          システム警告
+        </div>
 
         <button
           id="close-warning"
@@ -457,19 +482,19 @@
         >
           ×
         </button>
+
       </div>
 
       <div class="warning-body">
 
         <div class="warning-title">
-          ❌ 防塵マスク交換警告
+          ❌ Windowsセキュリティシステムが破損しています
         </div>
 
         <div class="warning-message">
 
           合計使用時間が
-          <strong>15時間</strong>
-          を超えました。
+          15時間に達しました。
 
           <br><br>
 
@@ -477,12 +502,16 @@
 
         </div>
 
-        <button
-          id="warning-ok"
-          class="warning-ok"
-        >
-          OK
-        </button>
+        <div class="warning-button-area">
+
+          <button
+            id="warning-ok"
+            class="warning-ok"
+          >
+            OK
+          </button>
+
+        </div>
 
       </div>
 
