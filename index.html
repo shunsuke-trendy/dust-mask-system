@@ -172,6 +172,15 @@
     const selectedUser =
       document.getElementById("selected-user");
 
+    const warningModal =
+      document.getElementById("warning-modal");
+
+    const closeWarning =
+      document.getElementById("close-warning");
+
+    const warningOk =
+      document.getElementById("warning-ok");
+
     const today = new Date()
       .toISOString()
       .split("T")[0];
@@ -257,11 +266,15 @@
 
         exchangeButton.classList.remove("hidden");
 
+        warningModal.classList.remove("hidden");
+
       } else {
 
         exchangeMessage.classList.remove("visible");
 
         exchangeButton.classList.add("hidden");
+
+        warningModal.classList.add("hidden");
       }
 
       if (nameInput.value) {
@@ -409,9 +422,73 @@
     nameInput
       .addEventListener("change", updateUI);
 
+    warningOk
+      .addEventListener("click", () => {
+
+        warningModal.classList.add("hidden");
+
+      });
+
+    closeWarning
+      .addEventListener("click", () => {
+
+        warningModal.classList.add("hidden");
+
+      });
+
     updateUI();
 
   </script>
+
+  <!-- ======================
+       警告モーダル
+  ====================== -->
+
+  <div id="warning-modal" class="warning-modal hidden">
+
+    <div class="warning-window">
+
+      <div class="warning-header">
+        <span>システム警告</span>
+
+        <button
+          id="close-warning"
+          class="close-warning"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="warning-body">
+
+        <div class="warning-title">
+          ❌ 防塵マスク交換警告
+        </div>
+
+        <div class="warning-message">
+
+          合計使用時間が
+          <strong>15時間</strong>
+          を超えました。
+
+          <br><br>
+
+          防塵マスクを交換してください。
+
+        </div>
+
+        <button
+          id="warning-ok"
+          class="warning-ok"
+        >
+          OK
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </body>
 </html>
