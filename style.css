@@ -398,4 +398,599 @@ h2 {
   font-size: 1.4rem;
 
   font-weight: 800;
+}* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --text: #0f172a;
+  --sub: #64748b;
+  --border: #dbe4ee;
+  --primary: #2563eb;
+  --danger: #dc2626;
+  --warning: #f59e0b;
+  --success: #16a34a;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  font-family:
+    "Hiragino Sans",
+    "Noto Sans JP",
+    sans-serif;
+
+  color: var(--text);
+
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ======================
+   全体
+====================== */
+
+.wrap {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 16px 12px 40px;
+}
+
+/* ======================
+   白カード
+====================== */
+
+.card {
+  background: var(--card);
+
+  border-radius: 26px;
+
+  padding:
+    22px
+    16px
+    32px;
+
+  box-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+/* ======================
+   タイトル
+====================== */
+
+h1 {
+  margin: 0 0 26px;
+
+  font-size: 2rem;
+
+  line-height: 1.25;
+
+  font-weight: 900;
+
+  text-align: center;
+
+  letter-spacing: -0.03em;
+
+  word-break: keep-all;
+
+  overflow-wrap: anywhere;
+}
+
+/* 小さいiPhone用 */
+
+@media (max-width: 390px) {
+
+  h1 {
+    font-size: 1.7rem;
+  }
+}
+
+/* ======================
+   フォーム
+====================== */
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  margin-bottom: 10px;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+}
+
+/* ======================
+   入力欄
+====================== */
+
+.field input,
+.field select {
+  width: 100%;
+
+  height: 56px;
+
+  padding: 0 16px;
+
+  border:
+    1px solid var(--border);
+
+  border-radius: 18px;
+
+  background: #fff;
+
+  font-size: 16px;
+
+  color: var(--text);
+
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* ======================
+   日付入力
+====================== */
+
+input[type="date"] {
+  width: 100%;
+
+  height: 56px;
+
+  padding: 0 16px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 18px;
+
+  background: #fff;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  color: var(--text);
+
+  text-align: center;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  display: flex;
+  align-items: center;
+
+  line-height: 56px;
+}
+
+/* iPhone Safari */
+
+input[type="date"]::-webkit-date-and-time-value {
+  text-align: center;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+/* focus */
+
+.field input:focus,
+.field select:focus {
+  outline: none;
+
+  border-color: var(--primary);
+
+  box-shadow:
+    0 0 0 4px
+    rgba(37, 99, 235, 0.12);
+}
+
+/* ======================
+   使用時間
+====================== */
+
+.time-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.time-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.time-field input {
+  flex: 1;
+}
+
+.time-field span {
+  width: 42px;
+
+  font-size: 1rem;
+
+  font-weight: 700;
+
+  color: var(--sub);
+}
+
+/* ======================
+   個別表示
+====================== */
+
+.selected-user {
+  margin-top: 24px;
+
+  padding: 16px;
+
+  background: #eef4ff;
+
+  border-radius: 18px;
+
+  font-size: 0.96rem;
+
+  line-height: 1.5;
+
+  font-weight: 700;
+}
+
+/* ======================
+   ステータス
+====================== */
+
+.status-grid {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+
+  margin-top: 24px;
+}
+
+.status-card {
+  border:
+    1px solid var(--border);
+
+  border-radius: 22px;
+
+  padding: 22px 16px;
+
+  text-align: center;
+
+  background: #fff;
+}
+
+.status-label {
+  margin: 0;
+
+  color: var(--sub);
+
+  font-size: 0.95rem;
+
+  font-weight: 600;
+}
+
+.status-value {
+  margin-top: 12px;
+
+  font-size: 2rem;
+
+  line-height: 1.3;
+
+  font-weight: 800;
+}
+
+/* ======================
+   プログレス
+====================== */
+
+.progress-card {
+  margin-top: 24px;
+}
+
+.progress-bar {
+  width: 100%;
+
+  height: 16px;
+
+  background: #dbe4ee;
+
+  border-radius: 999px;
+
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 0%;
+
+  height: 100%;
+
+  border-radius: 999px;
+
+  background: var(--primary);
+
+  transition: width 0.3s;
+}
+
+.progress-fill.warning {
+  background: var(--warning);
+}
+
+.progress-fill.danger {
+  background: var(--danger);
+}
+
+.progress-label {
+  margin-top: 8px;
+
+  text-align: right;
+
+  font-size: 0.95rem;
+
+  font-weight: 700;
+}
+
+/* ======================
+   警告
+====================== */
+
+.exchange-message {
+  display: none;
+
+  margin-top: 20px;
+
+  padding: 16px;
+
+  border-radius: 18px;
+
+  background: #fef3c7;
+
+  color: #92400e;
+
+  font-size: 0.95rem;
+
+  line-height: 1.6;
+
+  font-weight: 700;
+}
+
+.exchange-message.visible {
+  display: block;
+}
+
+/* ======================
+   ボタン
+====================== */
+
+.action-group {
+  display: flex;
+  flex-direction: column;
+
+  gap: 14px;
+
+  margin-top: 24px;
+}
+
+.button {
+  width: 100%;
+
+  height: 56px;
+
+  border: none;
+
+  border-radius: 18px;
+
+  font-size: 1rem;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.primary-button {
+  background: var(--primary);
+  color: #fff;
+}
+
+.exchange-button {
+  background: var(--success);
+  color: #fff;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ======================
+   履歴
+====================== */
+
+.history-section {
+  margin-top: 34px;
+}
+
+h2 {
+  margin-bottom: 18px;
+
+  font-size: 1.4rem;
+
+  font-weight: 800;
+}
+
+.table-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+table,
+thead,
+tbody,
+tr,
+td {
+  display: block;
+  width: 100%;
+}
+
+thead {
+  display: none;
+}
+
+tr {
+  background: #fff;
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  padding: 14px 16px;
+
+  margin-bottom: 12px;
+}
+
+td {
+  padding: 10px 0;
+
+  font-size: 0.96rem;
+
+  line-height: 1.5;
+}
+
+td::before {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: var(--sub);
+
+  font-size: 0.82rem;
+
+  font-weight: 700;
+}
+
+td:nth-child(1)::before {
+  content: "名前";
+}
+
+td:nth-child(2)::before {
+  content: "使用日";
+}
+
+td:nth-child(3)::before {
+  content: "使用時間";
+}
+
+td:nth-child(4)::before {
+  content: "操作";
+}
+
+.delete-button {
+  width: 100%;
+
+  height: 44px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  background: var(--danger);
+
+  color: #fff;
+
+  font-size: 0.95rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.empty-row td::before {
+  content: "";
+}
+
+/* ======================
+   タブレット以上
+====================== */
+
+@media (min-width: 768px) {
+
+  .wrap {
+    max-width: 900px;
+  }
+
+  .status-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .time-inputs {
+    flex-direction: row;
+  }
+
+  .action-group {
+    flex-direction: row;
+  }
+
+  .button {
+    width: 180px;
+  }
+
+  table {
+    display: table;
+    border-collapse: collapse;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tbody {
+    display: table-row-group;
+  }
+
+  tr {
+    display: table-row;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  th,
+  td {
+    display: table-cell;
+
+    padding: 16px;
+
+    border-bottom: 1px solid var(--border);
+  }
+
+  td::before {
+    display: none;
+  }
+
+  .delete-button {
+    width: auto;
+    padding: 0 18px;
+  }
 }
